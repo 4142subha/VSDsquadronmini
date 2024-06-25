@@ -18,3 +18,12 @@ $ riscv64-unknown-elf-objdump -d filename.o //Gives bunch of Code
 $ riscv64-unknown-elf-objdump -d filename.o | less // Gives Reduced Code
 /main //to view the main function of the code
 ![main 2](https://github.com/4142subha/VSDsquadronmini/assets/173649380/1cbca55b-70a2-4e41-99ff-becde33fcc39)
+# clock cycle divider c program
+To lower the frequency of a clock signal, utilize a clock cycle divider circuit. In digital circuits, this is frequently necessary because some components have a lower clock frequency requirement than the main system clock. A basic C program that emulates a clock cycle divider is shown below. The program will generate a lower frequency output by taking the input clock frequency and dividing it by a predetermined factor.
+![pro 1](https://github.com/4142subha/VSDsquadronmini/assets/173649380/17d2fa30-7dce-4b6e-8643-2fb3acf5b40f)
+![pro 2](https://github.com/4142subha/VSDsquadronmini/assets/173649380/80a195c1-77ef-42ef-b43b-981dd228015c)
+Function clock_signal: This one divides the frequency of an input clock signal by a specified factor and mimics the creation of a clock signal.
+frequency: The clock frequency of the input, expressed in Hz.
+Divide the input clock frequency by the given factor, divide_factor.
+The function tracks clock cycles using a straightforward counter (clock_count), and when the counter approaches the divide factor, it toggles the output clock signal (output_clock). Based on the input frequency, nanosleep is utilized to simulate the time interval between clock pulses.
+![pro3](https://github.com/4142subha/VSDsquadronmini/assets/173649380/ccadcb6f-1222-4eb5-b9ff-c6b1fb4f2fcd)

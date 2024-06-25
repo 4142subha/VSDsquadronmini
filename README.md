@@ -27,3 +27,6 @@ frequency: The clock frequency of the input, expressed in Hz.
 Divide the input clock frequency by the given factor, divide_factor.
 The function tracks clock cycles using a straightforward counter (clock_count), and when the counter approaches the divide factor, it toggles the output clock signal (output_clock). Based on the input frequency, nanosleep is utilized to simulate the time interval between clock pulses.
 ![pro3](https://github.com/4142subha/VSDsquadronmini/assets/173649380/ccadcb6f-1222-4eb5-b9ff-c6b1fb4f2fcd)
+# Assembly code for the clock divider
+![pro 4](https://github.com/4142subha/VSDsquadronmini/assets/173649380/a3a7c303-de6b-491c-a80f-b11c9671b034)
+![pro 5](https://github.com/4142subha/VSDsquadronmini/assets/173649380/a5c5799b-046c-497b-8770-eebe609bc258)

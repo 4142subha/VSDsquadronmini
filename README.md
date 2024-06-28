@@ -30,3 +30,15 @@ The function tracks clock cycles using a straightforward counter (clock_count), 
 # Assembly code for the clock divider
 ![pro 4](https://github.com/4142subha/VSDsquadronmini/assets/173649380/a3a7c303-de6b-491c-a80f-b11c9671b034)
 ![pro 5](https://github.com/4142subha/VSDsquadronmini/assets/173649380/a5c5799b-046c-497b-8770-eebe609bc258)
+# spike simulation for sum 1 to n
+Launch a text editor, then start writing the C program.
+Name the file sum_to_n.c and save it.
+To access the directory containing sum_to_n.c, use a terminal.
+Utilizing gcc -o sum_to_n sum_to_n.c, compile the program.
+Use./sum_to_n to launch the program.
+Using an Ubuntu machine and a C application, these procedures should provide you with a basic spike simulation of adding up numbers from 1 to 𝑛 n.
+![spike 1](https://github.com/4142subha/VSDsquadronmini/assets/173649380/8dbba27c-6614-4edb-96a6-86d175af35b8)
+$ riscv64-unknown-elf-objdump -d filename.o | less // Gives Reduced Code
+![spike 2](https://github.com/4142subha/VSDsquadronmini/assets/173649380/4cea6022-118d-4620-ba1a-66981894f03a)
+# Debugging code
+![spike 3](https://github.com/4142subha/VSDsquadronmini/assets/173649380/ac4f391e-b0f2-47d6-8596-729078f33dbc)

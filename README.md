@@ -62,82 +62,102 @@ BNE r0, r1, 20: 0x01404063
 BEQ r0, r0, 15: 0x00e04063
 LW r13, r1, 2: 0x00209083
 SLL r15, r1, r2: 0x002091b3
+
 Based on their encoding format, RISC-V instructions are divided into six primary types: R, I, S, B, U, and J types. Within the 32-bit instruction code, each type has a unique structure made up of fields like opcode, rd, funct3, rs1, rs2, and funct7.
 ![image](https://github.com/4142subha/VSDsquadronmini/assets/173649380/d1b82cc2-7ca6-46b9-a6c4-7c2375395502)
+
 #Register-register operations are performed using the R-type.
 Format: 31:25 [funct7] rs2[24:20] rs1[19:15] [14:12] funct3[11:7] rd opcode[6:0]
 Add x1, x2, and x3 to 0000000 00011 00010 000 00001 0110011, for instance.
+
 #I-type: Used for load, CSR, and instantaneous arithmetic instructions.
 Imm[31:20] is the format. rs1[19:15] [14:12] funct3[11:7] rd opcode[6:0]
 Addi x1, x2, 10 - 000000000010 00010 000 00001 0010011 is one example.
+
 #S-type: Referred to in store guidelines.
 Imm[31:25] is the format. rs2[24:20] rs1[19:15] funct3[14:12] imm[11:7] opcode[6:0]
 SW x1, 4(x2) - 0000000 00001 00010 010 00010 0100011 is an example.
+
 #B-type: Applied to branches with conditions.
 Immediate: [31] imm[7] rs2[24:20] rs1[19:15] funct3[14:12] imm[11:8] imm[30:25] opcode[6:0]
 Beq x1, x2, 8 - 0000000 00010 00001 000 00010 1100011 is an example.
+
 #U-type: Applied to higher-level instant commands.
 Format: opcode[6:0], rd[11:7], imm[31:12].
-Luis X1, 0x1000 - 000000010000 00000 00001 0110111, as an example
+Luis X1, 0x1000 - 000000010000 00000 00001 0110111, as an example.
+
 #J-type: Jump instructions are used with this type.
 Immediate: [20] imm[10:1] imm[11] imm[19:12] opcode[6:0] rd[11:7]
-Jal x1, 16 - 0000000 00001 00001 00000 1101111, as an example
+Jal x1, 16 - 0000000 00001 00001 00000 1101111, as an example.
+
 # Decoded Instruction
 #1. ADD R-type (r1, r2, r3)
 Opcode: 0110011
 Function 3: 000
 Funct7: 000000
 Code of Instruction: 0000000 00011 00010 000 00001 0110011
+
 #2. R-type SUB r3, r1, r2.
 Opcode: 0110011
 Function 3: 000
 Function 7: 0100000
 Code of Instruction: 0100000 00010 00001 000 00011 0110011
+
 #3. AND R-type (r2, r1, r3)
 Opcode: 0110011
 Function 3: 111
 Funct7: 000000
 Code of Instruction: 000000000011 00001 111 00010 0110011
+
 #4. OR R-type (r8, r2, r5)
 Opcode: 0110011
 Function 3: 110
 Funct7: 000000
 0000000 00101 00010 110 01000 0110011 is the instruction code.
+
 #5. R-type XOR r8, r1, and r4
 Opcode: 0110011
 Function 3: 100
 Funct7: 000000
 Code of Instruction: 0000000 00100 00001 100 01000 0110011
+
 #6. R-type SLT r10, r2, r4.
 Opcode: 0110011
 Function 3: 010
 Funct7: 000000
 Code of Instruction: 0000000 00100 00010 010 01010 0110011
+
 #7. I-type (ADDI r12, r3, 5)
 0010011 is the Opcode.
 Function 3: 000
 Code of Instruction: 000000000101 00011 000 01100 0010011
+
 #8. S-type, r3, r1, and 4.
 Opcode: 0100011
 Function 3: 010
 Code of Instruction: 000000000011 00001 010 00010 0100011
+
 #9. R-type SRL r16, r11, r2
 Opcode: 0110011
 Function 3: 101
 Funct7: 000000
 0000000 00010 01011 101 10000 0110011 is the instruction code.
+
 #10. BNE Type: B-type r0, r1, 20
 Opcode: 1100011
 Function 3: 001
 Instruction Code: 01010 1100011 0000000 00001 00000 001
+
 #11. BEQ r0, r0, 15 B-type
 Opcode: 1100011
 Function 3: 000
 Code of Instruction: 00000000000000000000000 01111 1100011
+
 #12. I-type LW r13, r11, 2
 Opcode: 0000011
 Function 3: 010
 Instruction Code: 01011 010 01101 0000011 000000000010
+
 #13. SLL R-type (r15, r11, r2)
 Opcode: 0110011
 Function 3: 001

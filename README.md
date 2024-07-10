@@ -163,3 +163,40 @@ Opcode: 0110011
 Function 3: 001
 Funct7: 000000
 Instruction Code: 01011 001 01111 0110011 0000000 00010.
+
+# TASK 5
+Use this RISC-V Core Verilog netlist and testbench for functional simulation experiment and upload the waveforms.
+# 1 CLONING THE REFERENCE REPOSITORY
+$ git clone https://github.com/vinayrayapati/rv32i.git my_riscv_project
+$ cd my_riscv_project 
+![task 5](https://github.com/4142subha/VSDsquadronmini/assets/173649380/d3eb73d3-65b0-4e82-a0bb-f0359237e046)
+# 2 SETTING UP THE SIMILATION TOOLS
+$ sudo apt update
+$ sudo apt install iverilog gtkwave -
+![task 5](https://github.com/4142subha/VSDsquadronmini/assets/173649380/d3eb73d3-65b0-4e82-a0bb-f0359237e046)
+# 3 RUN THE FUNCTIONAL SIMULATIONAL
+$ nano iiitb_rv32i_tb.v 
+compile and simulate:
+$ iverilog -o rv32i_simulation iiitb_rv32i.v iiitb_rv32i_tb.v
+$ vvp rv32i_simulation 
+gtkwave window will open after commanding the below code
+$ gtkwave simulation.vcd 
+
+# OUTPUT
+
+# ADD
+![and](https://github.com/4142subha/VSDsquadronmini/assets/173649380/1d0da72f-fd7c-4ca4-bda9-517745b60cdf)
+# ADDI
+![addi](https://github.com/4142subha/VSDsquadronmini/assets/173649380/3d52659d-6f6c-43ba-bb37-2f9a31756b54)
+# SUB
+![sub](https://github.com/4142subha/VSDsquadronmini/assets/173649380/ce287616-48a1-4254-8675-bfd052947ba9)
+# AND
+![andd](https://github.com/4142subha/VSDsquadronmini/assets/173649380/8d0f4bdc-0c1a-4afb-9d90-684749d30079)
+# OR
+![or](https://github.com/4142subha/VSDsquadronmini/assets/173649380/5ee43392-c598-4f8e-b6dc-81f2709b7efe)
+# XOR
+![xor](https://github.com/4142subha/VSDsquadronmini/assets/173649380/949703ea-a183-4c62-8eda-502c870fed3d)
+# SLT
+![slt](https://github.com/4142subha/VSDsquadronmini/assets/173649380/6c9b6182-6073-4481-bec8-b1fec0394e2a)
+# BEQ
+![beq](https://github.com/4142subha/VSDsquadronmini/assets/173649380/7260714d-d821-4ac7-85f7-6f6b32ddaee1)

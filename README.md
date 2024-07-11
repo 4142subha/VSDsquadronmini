@@ -200,3 +200,124 @@ $ gtkwave simulation.vcd
 ![slt](https://github.com/4142subha/VSDsquadronmini/assets/173649380/6c9b6182-6073-4481-bec8-b1fec0394e2a)
 # BEQ
 ![beq](https://github.com/4142subha/VSDsquadronmini/assets/173649380/7260714d-d821-4ac7-85f7-6f6b32ddaee1)
+
+# TASK 6
+# PROJECT NAME 
+
+Clock Cycle Divider - Crafting a Digital Clock Divider Circuit 
+
+# OVERVIEW
+
+The "Clock Cycle Divider" project uses a RISC-V processor to design and build a digital clock divider circuit. A clock divider, which lowers a clock signal's frequency and produces lower-frequency signals from a higher-frequency input, is a crucial part of digital systems. This is crucial for applications like digital signal processing, communication systems, and microprocessors that need synchronized processes at various clock speeds. Create the Circuit for the Clock Divider: Make a digital clock divider that generates a lower-frequency output from a high-frequency clock input. Apply with a RISC-V Processor: Control the clock division logic and the circuit's overall operation by utilizing the RISC-V processor. Aim for Efficiency Optimization Make sure the clock divider performs at its best and uses the least amount of power possible.Verify Functionality: To guarantee precise and dependable operation, test the clock divider circuit under various conditions.
+
+# COMPONENTS REQUIRED
+
+RISC-V Processor
+Clock Source (Crystal Oscillator)
+Clock Divider Circuit
+Power Supply
+Reset Circuit
+Input/Output Interfaces (GPIO)
+Debugging Interface (JTAG)
+
+# CIRCUIT CONNECTION
+
+Attach the RISC-V CPU's power pins as well as any extra components to the positive power supply, or Vcc. Connect the GND (ground) to the ground pins of the RISC-V CPU and other parts. Connect pin Clock of the RISC-V processor to output of the crystal oscillator. For stability, make sure capacitors are grounded and decoupled correctly. The clock divider circuit can be designed using flip-flops or dedicated clock divider integrated circuits (ICs). Connect the clock source's input to the clock divider. Connect the output of the clock divider to the appropriate pins on the RISC-V CPU to enable internal clocking. A pull-up or pull-down resistor is used to connect a reset button circuit to the reset pin of a RISC-V processor.Verify that the reset signal is steady and free of bounce.Overall Goal  The GPIO pins should be connected to headers or external components in order to interface with other circuits or peripherals.GPIO pins should be configured as inputs or outputs according on what your project requires. The JTAG interface pins must be connected to a debugging tool or header in order to program and debug.Check to make sure the signals for the TDI, TDO, TCK, and TMS are linked correctly, as well as the ground and power. If your project requires communication interfaces, attach the matching pins (such as UART, I2C, or SPI) to the external devices or headers.Verify that the voltage levels and signal integrity are appropriate to guarantee reliable communication.
+
+# SCHEMATIC DIAGRAM
+
++-------------------------------------------+
+|            RISC-V Processor               |
+|  +-------+                                |
+|  | Clock |                                |
+|  |Source |                                |
+|  +-------+                                |
+|      |                                    |
+|      |                                    |
+|  +-----------+                           |
+|  |Clock      |                           |
+|  |Divider    |                           |
+|  +-----------+                           |
+|      |                                    |
+|      |                                    |
+|     ---                                   |
+|    | GND |                                |
+|     ---                                   |
+|      |                                    |
+|  +-------+   +-------+   +-----------+    |
+|  | GPIO  |   | JTAG  |   |  Power    |    |
+|  |       |   |       |   |  Supply   |    |
+|  +-------+   +-------+   +-----------+    |
+|    |             |             |          |
++----|-------------|-------------|----------+
+
+# PINOUT DIAGRAM
+
++------------------------+
+| RISC-V Processor       |
+|                        |
+|    +-------------+     |
+|    | CLK_IN      |<----|--- Clock Input
+|    +-------------+     |
+|    +-------------+     |
+|    | CTRL        |<----|--- Control Signals (Start/Stop/Reset)
+|    +-------------+     |
+|    +-------------+     |
+|    | CLK_OUT     |---->|--- Output Clock
+|    +-------------+     |
+|    +-------------+     |
+|    | Vcc         |<----|--- Power Supply
+|    +-------------+     |
+|    +-------------+     |
+|    | GND         |<----|--- Ground
+|    +-------------+     |
++------------------------+
+
+# PROGRAM
+
+#include <stdint.h>
+#include <stdbool.h>
+
+// Define GPIO addresses and other constants as per your specific RISC-V hardware
+#define GPIO_BASE_ADDRESS  0x10012000
+#define GPIO_OUTPUT_ENABLE (GPIO_BASE_ADDRESS + 0x08)
+#define GPIO_OUTPUT_VALUE  (GPIO_BASE_ADDRESS + 0x0C)
+
+#define CLOCK_FREQUENCY    1000000 // 1 MHz clock
+#define DIVIDE_FACTOR      1000    // Divide by 1000
+#define TOGGLE_PERIOD      (CLOCK_FREQUENCY / (2 * DIVIDE_FACTOR))
+
+// Function to initialize GPIO
+void gpio_init() {
+    // Enable GPIO output
+    *(volatile uint32_t *)GPIO_OUTPUT_ENABLE = 0x01;
+}
+
+// Function to toggle GPIO pin
+void toggle_gpio() {
+    static bool state = false;
+    if (state) {
+        *(volatile uint32_t *)GPIO_OUTPUT_VALUE = 0x01;
+    } else {
+        *(volatile uint32_t *)GPIO_OUTPUT_VALUE = 0x00;
+    }
+    state = !state;
+}
+
+// Delay function
+void delay(uint32_t cycles) {
+    for (volatile uint32_t i = 0; i < cycles; i++);
+}
+
+int main() {
+    gpio_init();
+    
+    while (1) {
+        toggle_gpio();
+        delay(TOGGLE_PERIOD);
+    }
+    
+    return 0;
+}
+
+

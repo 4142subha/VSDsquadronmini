@@ -1,0 +1,45 @@
+#include <stdint.h>
+#include <stdbool.h>
+
+// Define GPIO addresses and other constants as per your specific RISC-V hardware
+#define GPIO_BASE_ADDRESS  0x10012000
+#define GPIO_OUTPUT_ENABLE (GPIO_BASE_ADDRESS + 0x08)
+#define GPIO_OUTPUT_VALUE  (GPIO_BASE_ADDRESS + 0x0C)
+
+#define CLOCK_FREQUENCY    1000000 // 1 MHz clock
+#define DIVIDE_FACTOR      1000    // Divide by 1000
+#define TOGGLE_PERIOD      (CLOCK_FREQUENCY / (2 * DIVIDE_FACTOR))
+
+// Function to initialize GPIO
+void gpio_init() {
+    // Enable GPIO output
+    *(volatile uint32_t *)GPIO_OUTPUT_ENABLE = 0x01;
+}
+
+// Function to toggle GPIO pin
+void toggle_gpio() {
+    static bool state = false;
+    if (state) {
+        *(volatile uint32_t *)GPIO_OUTPUT_VALUE = 0x01;
+    } else {
+        *(volatile uint32_t *)GPIO_OUTPUT_VALUE = 0x00;
+    }
+    state = !state;
+}
+
+// Delay function
+void delay(uint32_t cycles) {
+    for (volatile uint32_t i = 0; i < cycles; i++);
+}
+
+int main() {
+    gpio_init();
+    
+    while (1) {
+        toggle_gpio();
+        delay(TOGGLE_PERIOD);
+    }
+    
+    return 0;
+}
+

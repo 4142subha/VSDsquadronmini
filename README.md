@@ -234,10 +234,10 @@ Attach the RISC-V CPU's power pins as well as any extra components to the positi
 |  +-------+                                |
 |      |                                    |
 |      |                                    |
-|  +-----------+                           |
-|  |Clock      |                           |
-|  |Divider    |                           |
-|  +-----------+                           |
+|  +-----------+                            |
+|  |Clock      |                            |
+|  |Divider    |                            |
+|  +-----------+                            |
 |      |                                    |
 |      |                                    |
 |     ---                                   |
